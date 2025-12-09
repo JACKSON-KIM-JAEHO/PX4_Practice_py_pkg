@@ -1,0 +1,5 @@
+setuptools
+py-trees
+
+[test]
+pytest
