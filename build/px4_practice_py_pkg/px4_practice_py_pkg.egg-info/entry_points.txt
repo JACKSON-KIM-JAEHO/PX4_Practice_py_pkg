@@ -1,3 +1,0 @@
-[console_scripts]
-main = px4_practice_py_pkg.main:main
-offboardtakeoff = px4_practice_py_pkg.offboardtakeoff:main
