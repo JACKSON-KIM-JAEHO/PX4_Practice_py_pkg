@@ -1,0 +1,4 @@
+# Node 추가
+    - main_bt.xml을 Groot2를 통해 수정한다.
+    - bt_nodes.py에 추가하고자 하는 노드를 구현한다
+    

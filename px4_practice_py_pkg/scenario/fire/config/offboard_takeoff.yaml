@@ -1,0 +1,12 @@
+bt_runner:
+  ros__parameters:    
+    drone:            
+      position_x: 0.0
+      position_y: 0.0
+      position_z: 40.0
+    safe_transition_point:
+      x: 120.0
+      y: 0.0
+      z: 40.0
+      tol_xy: 2.0
+      tol_z: 1.0

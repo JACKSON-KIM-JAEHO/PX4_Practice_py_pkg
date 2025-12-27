@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root BTCPP_format="4">
+  <BehaviorTree ID="Auto_Flight">
+    <Sequence>
+      <ReactiveFallback>
+        <IsReadytoTakeoff/>
+        <Vertical_Takeoff/>
+      </ReactiveFallback>
+      <ReactiveFallback>
+        <IsFWMode/>
+        <Sequence>
+          <ReactiveFallback>
+            <IsReadytoTransitionFWToMC/>
+            <ReadyToTranstion/>
+          </ReactiveFallback>
+          <TransitionToFW/>
+        </Sequence>
+      </ReactiveFallback>
+      <Sequence>
+        <ReactiveFallback>
+          <IsNoMoreTask/>
+          <Parallel failure_count="1"
+                    success_count="-1">
+            <ReactiveFallback>
+              <IsArrivedAtTarget/>
+              <PatrolFlight/>
+            </ReactiveFallback>
+            <ReactiveFallback>
+              <IsNoneFireDetected/>
+              <Sequence>
+                <Parallel failure_count="1"
+                          success_count="-1">
+                  <ReactiveFallback>
+                    <IsArrivedAtExtinguishPoint/>
+                    <MoveToRescuePoint/>
+                  </ReactiveFallback>
+                  <Sequence>
+                    <ReactiveFallback>
+                      <IsMCMode/>
+                      <Sequence>
+                        <ReactiveFallback>
+                          <IsReadytoTransitionFWToMC/>
+                          <ReadyToTranstion/>
+                        </ReactiveFallback>
+                        <TransitionToMC/>
+                      </Sequence>
+                    </ReactiveFallback>
+                  </Sequence>
+                </Parallel>
+                <HoverExtinguish/>
+                <Parallel failure_count="1"
+                          success_count="-1">
+                  <ReactiveFallback>
+                    <IsArrivedAtSafeTransitionPoint/>
+                    <MoveToSafeTransitionPoint/>
+                  </ReactiveFallback>
+                  <ReactiveFallback>
+                    <IsFWMode/>
+                    <Sequence>
+                      <ReactiveFallback>
+                        <IsReadyToTransitionMCToFW/>
+                        <ReadyToTranstion/>
+                      </ReactiveFallback>
+                      <TransitionToFW/>
+                    </Sequence>
+                  </ReactiveFallback>
+                </Parallel>
+              </Sequence>
+            </ReactiveFallback>
+          </Parallel>
+        </ReactiveFallback>
+      </Sequence>
+      <Sequence>
+        <IsNoMoreTask/>
+        <ReactiveFallback>
+          <IsReturnToBase/>
+          <Parallel failure_count="1"
+                    success_count="-1">
+            <ReturnToBase/>
+            <ReactiveFallback>
+              <IsMCMode/>
+              <Sequence>
+                <ReactiveFallback>
+                  <IsReadytoTransitionFWToMC/>
+                  <ReadyToTranstion/>
+                </ReactiveFallback>
+                <TransitionToMC/>
+              </Sequence>
+            </ReactiveFallback>
+          </Parallel>
+        </ReactiveFallback>
+      </Sequence>
+      <Sequence>
+        <VerticalLanding/>
+        <disArm/>
+      </Sequence>
+    </Sequence>
+  </BehaviorTree>
+
+  <!-- Description of Node Models (used by Groot) -->
+  <TreeNodesModel>
+    <Action ID="HoverExtinguish"
+            editable="true"/>
+    <Condition ID="IsArrivedArSafeTransitionPoint"
+               editable="true"/>
+    <Condition ID="IsArrivedAtExtinguishPoint"
+               editable="true"/>
+    <Condition ID="IsArrivedAtTarget"
+               editable="true"/>
+    <Condition ID="IsFWMode"
+               editable="true"/>
+    <Condition ID="IsMCMode"
+               editable="true"/>
+    <Condition ID="IsNoMoreTask"
+               editable="true"/>
+    <Condition ID="IsNoneFireDetected"
+               editable="true"/>
+    <Condition ID="IsReadyToTransitionMCToFW"
+               editable="true"/>
+    <Condition ID="IsReadytoTakeoff"
+               editable="true"/>
+    <Condition ID="IsReadytoTransitionFWToMC"
+               editable="true"/>
+    <Condition ID="IsReturnToBase"
+               editable="true"/>
+    <Action ID="MoveToRescuePoint"
+            editable="true"/>
+    <Action ID="MoveToSafeTransitionPoint"
+            editable="true"/>
+    <Action ID="PatrolFlight"
+            editable="true"/>
+    <Action ID="ReadyToTranstion"
+            editable="true"/>
+    <Action ID="ReturnToBase"
+            editable="true"/>
+    <Action ID="TransitionToFW"
+            editable="true"/>
+    <Action ID="TransitionToMC"
+            editable="true"/>
+    <Action ID="VerticalLanding"
+            editable="true"/>
+    <Action ID="Vertical_Takeoff"
+            editable="true"/>
+    <Action ID="disArm"
+            editable="true"/>
+  </TreeNodesModel>
+
+</root>
+
+
